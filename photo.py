@@ -1,6 +1,7 @@
 #this only works on JPEG images
 from PIL import Image
 from PIL.ExifTags import TAGS
+from openpyxl import Workbook
 
 # path to the image or video
 imagename = "./IMG_5999.JPG"
@@ -11,6 +12,12 @@ image = Image.open(imagename)
 # extract EXIF data
 exifdata = image.getexif()
 
+# #create a workbook
+# wb = Workbook()
+# # grab the active worksheet
+# ws = wb.active
+dict = {}
+photolist = []
 # iterating over all EXIF data fields
 for tag_id in exifdata:
     # get the tag name, instead of human unreadable tag id
@@ -19,4 +26,20 @@ for tag_id in exifdata:
     # decode bytes 
     if isinstance(data, bytes):
         data = data.decode()
-    print(f"{tag:25}: {data}")
+    # print(f"{tag:25}: {data}")
+    dict[tag]=data
+
+print(dict)
+#
+# # Data can be assigned directly to cells
+# ws['A1'] = 42
+#
+# # Rows can also be appended
+# ws.append([1, 2, 3])
+#
+# # Python types will automatically be converted
+# import datetime
+# ws['A2'] = datetime.datetime.now()
+#
+# # Save the file
+# wb.save("sample.xlsx")
