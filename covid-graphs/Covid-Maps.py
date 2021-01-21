@@ -4,6 +4,7 @@ import altair as alt
 #get pandas - data maniputlation and tables
 import pandas as pd
 import requests
+from altair_saver import save
 
 ny_data_url = 'https://api.covidtracking.com/v1/states/ny/daily.json'
 
@@ -57,4 +58,4 @@ chart3 = alt.Chart(data3).mark_line().encode(
     )
 
 chartTotal = chart1 + chart2 + chart3
-chartTotal.save('chart.html')
+save(chartTotal, "chart.pdf")
